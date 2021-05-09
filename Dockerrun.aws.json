@@ -6,13 +6,15 @@
 			"name": "server",
 			"image": "christiemyburgh/multi-server",
 			"hostname": "api",
-			"essential": false
+			"essential": false,
+			"memory": 128
 		},
 		{
 			"name": "worker",
 			"image": "christiemyburgh/multi-worker",
 			"hostname": "worker",
-			"essential": false
+			"essential": false,
+			"memory": 128
 		},
 		{
 			"name": "nginx",
@@ -24,7 +26,8 @@
 					"containerPort": 80
 				}
 			],
-			"links": ["server"]
+			"links": ["server"],
+			"memory": 128
 		}
 	]
 }
