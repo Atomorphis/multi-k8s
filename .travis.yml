@@ -18,8 +18,8 @@ after_success:
     # Log in to the docker CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin 
     # Take these images and push them to docker hub
-    - docker push christiemyburgh/multi-client
     - docker push christiemyburgh/multi-nginx
     - docker push christiemyburgh/multi-server
     - docker push christiemyburgh/multi-worker
+    - docker push christiemyburgh/multi-client
 
