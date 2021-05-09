@@ -3,12 +3,6 @@
 	
 	"containerDefinitions": [
 		{
-			"name": "client",
-			"image": "christiemyburgh/multi-client",
-			"hostname": "client",
-			"essential": false
-		},
-		{
 			"name": "server",
 			"image": "christiemyburgh/multi-server",
 			"hostname": "api",
@@ -30,7 +24,7 @@
 					"containerPort": 80
 				}
 			],
-			"links": ["client", "server"]
+			"links": ["server"]
 		}
 	]
 }
