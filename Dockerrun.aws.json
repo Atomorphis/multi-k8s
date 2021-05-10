@@ -3,6 +3,13 @@
 	
 	"containerDefinitions": [
 		{
+			"name": "client",
+			"image": "christiemyburgh/multi-client",
+			"hostname": "client",
+			"essential": false,
+			"memory": 128			
+		},
+		{
 			"name": "server",
 			"image": "christiemyburgh/multi-server",
 			"hostname": "api",
