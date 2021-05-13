@@ -1,36 +1,36 @@
-language: generic
 sudo: required
-services:
-    - docker
-    
-before_install:
-    - docker build -t christiemyburgh/react-test -f ./client/Dockerfile.dev ./client
+language: generic
 
+services:
+  - docker
+
+before_install:
+  - docker build -t cygnetops/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run -e CI=true christiemyburgh/react-test npm test -- --coverage
+  - docker run -e CI=true cygnetops/react-test npm test
 
 after_success:
-    - docker build -t christiemyburgh/multi-client ./client
-    - docker build -t christiemyburgh/multi-nginx ./nginx
-    - docker build -t christiemyburgh/multi-server ./server
-    - docker build -t christiemyburgh/multi-worker ./worker
-    # Log in to the docker CLI
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin 
-    # Take these images and push them to docker hub
-    - docker push christiemyburgh/multi-client
-    - docker push christiemyburgh/multi-nginx
-    - docker push christiemyburgh/multi-server
-    - docker push christiemyburgh/multi-worker
-    
+  - docker build -t cygnetops/multi-client-10-14 ./client
+  - docker build -t cygnetops/multi-nginx-10-14 ./nginx
+  - docker build -t cygnetops/multi-server-10-14 ./server
+  - docker build -t cygnetops/multi-worker-10-14 ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push cygnetops/multi-client-10-14
+  - docker push cygnetops/multi-nginx-10-14
+  - docker push cygnetops/multi-server-10-14
+  - docker push cygnetops/multi-worker-10-14
+
 deploy:
-        provider: elasticbeanstalk
-        region: us-east-2
-        app: multi-docker
-        env: Multidocker-env-2
-        bucket_name: elasticbeanstalk-us-east-2-222114723784
-        bucket_path: docker-multi
-        on:
-            branch: master
-        access_key_id: $AWS_ACCESS_KEY
-        secret_access_key: $AWS_SECRET_KEY
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'multi-docker'
+  env: 'MultiDocker-env'
+  bucket_name: 'elasticbeanstalk-us-east-1-923445559289'
+  bucket_path: 'docker-multi'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
