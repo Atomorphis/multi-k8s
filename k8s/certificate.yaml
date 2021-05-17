@@ -3,7 +3,7 @@ kind: Certificate
 metadata:
     name: atogemini-com-tls
 spec:
-    sercretName: atogemini-com
+    secretName: atogemini-com
     issuerRef:
         name: letsencrypt-prod
         kind: ClusterIssuer
